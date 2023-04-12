@@ -1,5 +1,7 @@
 package piano;
 
+import piano.components.Window;
+
 import java.awt.EventQueue;
 
 /**
@@ -19,7 +21,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainFrame window = new MainFrame();
+					WindowController app = new WindowController();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

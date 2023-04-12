@@ -5,9 +5,9 @@ import java.awt.*;
 
 public class Window extends JFrame {
 
-    private JFrame mainFrame;
     private JPanel mainPanel;
     private JPanel piano;
+    public static Rectangle position;
 
 
 
@@ -16,8 +16,9 @@ public class Window extends JFrame {
         setBackground(SystemColor.inactiveCaption);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = (int) screenSize.getWidth();
-        int height = (int) screenSize.getHeight();
-        setBounds(0, 0, width, height - 50);
+        int height = (int) screenSize.getHeight() - 40;
+        position = new Rectangle(0, 0, width, height);
+        setBounds(position);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Jaka to melodia?");
 
@@ -36,7 +37,5 @@ public class Window extends JFrame {
         mainPanel.setVisible(true);
         piano.setVisible(true);
     }
-
-
 
 }

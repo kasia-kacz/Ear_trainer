@@ -9,6 +9,7 @@ import java.io.IOException;
 public class WindowController {
 
 	public Window window;
+	public String active_mode = "piano";
 
 	public WindowController(){
 		window = new Window();

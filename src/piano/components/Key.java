@@ -1,9 +1,12 @@
 package piano.components;
 
-import piano.WindowController;
+import piano.ExerciseHandler;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 public class Key extends JButton {
@@ -15,9 +18,12 @@ public class Key extends JButton {
     public int blackHeight;
     public int whiteHeight;
 
+    private ExerciseHandler handler;
 
-    public Key(String n, String c, Rectangle pianoSize, int x, int y) {
 
+    public Key(String n, String c, Rectangle pianoSize, int x, int y, ExerciseHandler h) {
+
+        handler = h;
         name = n;
         color = c;
 
@@ -48,8 +54,8 @@ public class Key extends JButton {
         setVisible(true);
 
         addActionListener(e -> {
-            WindowController.play_note(button);
-            //	WindowController.check_played_note(name);
+            play_note(button);
+            handler.check_played_note(button);
         });
     }
 
@@ -65,5 +71,29 @@ public class Key extends JButton {
         whiteHeight = (int) (pS.getHeight()*0.3);
         blackHeight = (int) (pS.getHeight()*0.4);
         position = new Rectangle(pX, pY, width, blackHeight);
+    }
+
+    /**
+     * Plays the right piano note depending on the clicked note by user.
+     *
+     * @param note	name of the note, that should be played
+     */
+    public static void play_note(String note) {
+        try {
+            String path_name = "./src/piano/notes/" + note + ".wav";
+            File file = new File(path_name);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file.getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+            //Thread.sleep(2000);
+
+        } catch (UnsupportedAudioFileException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        } catch (LineUnavailableException e1) {
+            e1.printStackTrace();
+        }
     }
 }

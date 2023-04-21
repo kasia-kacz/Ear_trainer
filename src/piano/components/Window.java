@@ -1,9 +1,10 @@
 package piano.components;
 
-import piano.WindowController;
+import piano.ExerciseHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Window extends JFrame {
@@ -19,6 +20,8 @@ public class Window extends JFrame {
     private JRadioButton difficult;
     public static Rectangle position;
 
+    private ExerciseHandler handler;
+
 
 
     public Window() {
@@ -31,14 +34,16 @@ public class Window extends JFrame {
         setBounds(position);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Jaka to melodia?");
+        handler = new ExerciseHandler();
 
         setup_panel();
         setVisible(true);
+
     }
 
     private void setup_panel(){
         mainPanel = new JPanel();
-        piano = new Piano();
+        piano = new Piano(handler);
         mainPanel.setBackground(new Color(240, 255, 240));
         add(mainPanel, BorderLayout.CENTER);
         mainPanel.setLayout(null);
@@ -64,6 +69,7 @@ public class Window extends JFrame {
         pos_new.setSize(140, 20);
 		setup_level(easy, pos_new);
 		easy.setSelected(true);
+        handler.read_exercise_folder("easy");
 
 		medium = new JRadioButton("Poziom średni");
         pos_new.setLocation((int) pos_new.getX(), (int) (pos_new.getY() + 30));
@@ -75,6 +81,33 @@ public class Window extends JFrame {
 
         Rectangle mode_pos = new Rectangle((int) (position.getWidth()*0.8) + 10, (int) (position.getHeight()*0.35), 150, 80);
         create_mode_button(mode_pos);
+        activate_buttons();
+    }
+
+    private void activate_buttons() {
+        easy.addActionListener(e -> {
+            handler.clear_exercises();
+            handler.read_exercise_folder("easy");
+        });
+
+		medium.addActionListener(e -> {
+            handler.clear_exercises();
+            handler.read_exercise_folder("medium");
+        });
+
+		difficult.addActionListener(e -> {
+            handler.clear_exercises();
+            handler.read_exercise_folder("difficult");
+        });
+
+        new_exercise.addActionListener(e -> {
+            handler.exercise_rand();
+            handler.play_exercise();
+        });
+
+        repeat_exercise.addActionListener(e -> {
+            handler.play_exercise();
+        });
     }
 
     private void setup_level(JRadioButton rb, Rectangle pos) {
@@ -118,6 +151,8 @@ public class Window extends JFrame {
                 mode.setText("Trening");
                 set_components_visibility(true);
             }
+            handler.set_check_note(0);
+            handler.set_active_mode(mode.getText());
         });
         mode.doClick();
 		mode.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
@@ -133,5 +168,7 @@ public class Window extends JFrame {
         medium.setVisible(b);
         difficult.setVisible(b);
     }
+
+
 
 }

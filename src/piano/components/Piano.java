@@ -1,5 +1,7 @@
 package piano.components;
 
+import piano.ExerciseHandler;
+
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -21,8 +23,10 @@ public class Piano extends JPanel {
 	private Key Gb;
 	private Key Ab;
 	private Key Bb;
+	private ExerciseHandler handler;
 
-	public Piano() {
+	public Piano(ExerciseHandler h) {
+		handler = h;
 		setBackground(SystemColor.info);
 		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Piano", TitledBorder.LEADING, TitledBorder.TOP, null, SystemColor.windowText));
 		setPosition();
@@ -77,57 +81,57 @@ public class Piano extends JPanel {
 		x = (int) (position.getWidth()*0.1);
 		y = (int) (position.getHeight()*0.65);
 
-		C1 = new Key("C1", "white", position, x, y);
+		C1 = new Key("C1", "white", position, x, y, handler);
 		add(C1);
 
 		x+=C1.getWidth();
-		D1 = new Key("D1", "white", position, x, y);
+		D1 = new Key("D1", "white", position, x, y, handler);
 		add(D1);
 
 		x+=D1.getWidth();
-		E1 = new Key("E1", "white", position, x, y);
+		E1 = new Key("E1", "white", position, x, y, handler);
 		add(E1);
 
 		x+=E1.getWidth();
-		F1 = new Key("F1", "white", position, x, y);
+		F1 = new Key("F1", "white", position, x, y, handler);
 		add(F1);
 
 		x+=F1.getWidth();
-		G1 = new Key("G1", "white", position, x, y);
+		G1 = new Key("G1", "white", position, x, y, handler);
 		add(G1);
 
 		x+=G1.getWidth();
-		A1 = new Key("A1", "white", position, x, y);
+		A1 = new Key("A1", "white", position, x, y, handler);
 		add(A1);
 
 		x+=A1.getWidth();
-		H1 = new Key("H1", "white", position, x, y);
+		H1 = new Key("H1", "white", position, x, y, handler);
 		add(H1);
 
 		x+=H1.getWidth();
-		C2 = new Key("C2", "white", position, x, y);
+		C2 = new Key("C2", "white", position, x, y, handler);
 		add(C2);
 
 		x = (int) (C1.getX()+2*C1.getWidth()/3);
 		y = (int) (C1.getY() - C1.blackHeight);
 
-		Db = new Key("C#/Db", "black", position, x, y);
+		Db = new Key("C#/Db", "black", position, x, y, handler);
 		add(Db);
 
 		x = (int) (D1.getX()+2*D1.getWidth()/3);
-		Eb = new Key("D#/Eb", "black", position, x, y);
+		Eb = new Key("D#/Eb", "black", position, x, y, handler);
 		add(Eb);
 
 		x = (int) (F1.getX()+2*F1.getWidth()/3);
-		Gb = new Key("F#/Gb", "black", position, x, y);
+		Gb = new Key("F#/Gb", "black", position, x, y, handler);
 		add(Gb);
 
 		x = (int) (G1.getX()+2*G1.getWidth()/3);
-		Ab = new Key("G#/Ab", "black", position, x, y);
+		Ab = new Key("G#/Ab", "black", position, x, y, handler);
 		add(Ab);
 
 		x = (int) (A1.getX()+2*A1.getWidth()/3);
-		Bb = new Key("A#/Bb", "black", position, x, y);
+		Bb = new Key("A#/Bb", "black", position, x, y, handler);
 		add(Bb);
 	}
 }

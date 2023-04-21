@@ -21,7 +21,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					WindowController app = new WindowController();
+					Window app = new Window();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

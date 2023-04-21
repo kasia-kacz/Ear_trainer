@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 
 /**
- * CongratulationWindow class creates the frame window with the congratulation message. It shows after finding the proper order of notes.
+ * CongratulationWindow class creates the frame window with the congratulation message. It pops up after finding the proper order of notes.
  * 
  * @author Katarzyna Kaczorowska
  * @version 1.1.2023
@@ -50,7 +50,7 @@ public class CongratulationWindow {
 		frame.getContentPane().add(label, BorderLayout.CENTER);
 		frame.getContentPane().add(imageLabel, BorderLayout.PAGE_END);
 		frame.pack();
-		MainFrame.centreWindow(frame);
+		//MainFrame.centreWindow(frame);
 		frame.setVisible(true);
 		
 	}

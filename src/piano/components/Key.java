@@ -9,6 +9,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Class representing one key on the keyboard.
+ */
+
 public class Key extends JButton {
 
     private String name;
@@ -30,12 +34,12 @@ public class Key extends JButton {
         setText(name);
         int size = 0;
         String button;
-        if(Objects.equals(color, "black")){
+        if (Objects.equals(color, "black")) {
             size = 7;
             setBackground(SystemColor.textText);
             setForeground(SystemColor.info);
             setSizeBlack(pianoSize, x, y);
-            button = name.substring(name.length()-2);
+            button = name.substring(name.length() - 2);
         } else {
             button = name;
             if (Objects.equals(color, "white")) {
@@ -43,8 +47,7 @@ public class Key extends JButton {
                 setBackground(SystemColor.info);
                 setForeground(SystemColor.textText);
                 setSizeWhite(pianoSize, x, y);
-            }
-            else {
+            } else {
                 System.err.println("Wrong key color");
             }
         }
@@ -59,24 +62,24 @@ public class Key extends JButton {
         });
     }
 
-    public void setSizeWhite(Rectangle pS, int pX, int pY){
-        int width = (int) (pS.getWidth()/10);
-        whiteHeight = (int) (pS.getHeight()*0.3);
-        blackHeight = (int) (pS.getHeight()*0.4);
+    public void setSizeWhite(Rectangle pS, int pX, int pY) {
+        int width = (int) (pS.getWidth() / 10);
+        whiteHeight = (int) (pS.getHeight() * 0.3);
+        blackHeight = (int) (pS.getHeight() * 0.4);
         position = new Rectangle(pX, pY, width, whiteHeight);
     }
 
-    public void setSizeBlack(Rectangle pS, int pX, int pY){
-        int width = (int) pS.getWidth()/15;
-        whiteHeight = (int) (pS.getHeight()*0.3);
-        blackHeight = (int) (pS.getHeight()*0.4);
+    public void setSizeBlack(Rectangle pS, int pX, int pY) {
+        int width = (int) pS.getWidth() / 15;
+        whiteHeight = (int) (pS.getHeight() * 0.3);
+        blackHeight = (int) (pS.getHeight() * 0.4);
         position = new Rectangle(pX, pY, width, blackHeight);
     }
 
     /**
      * Plays the right piano note depending on the clicked note by user.
      *
-     * @param note	name of the note, that should be played
+     * @param note name of the note, that should be played
      */
     public static void play_note(String note) {
         try {
@@ -88,11 +91,7 @@ public class Key extends JButton {
             clip.start();
             //Thread.sleep(2000);
 
-        } catch (UnsupportedAudioFileException e1) {
-            e1.printStackTrace();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        } catch (LineUnavailableException e1) {
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
             e1.printStackTrace();
         }
     }
